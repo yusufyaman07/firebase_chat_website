@@ -14,14 +14,14 @@ import Message from "../components/Message";
 
 const ChatPage = ({ room, setRoom }) => {
   const [messages, setMessages] = useState([]);
-  // mesaj gönderlince
+  // when message is sent
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // kolleksiyonun referasnını alma
+    // get reference of the collection
     const messagesCol = collection(db, "messages");
 
-    // kolleksiyona yeni döküman ekle
+    //add new document to collection
     await addDoc(messagesCol, {
       text: e.target[0].value,
       room,
@@ -33,35 +33,35 @@ const ChatPage = ({ room, setRoom }) => {
       createdAt: serverTimestamp(),
     });
 
-    // formu sıfırla
+    //reset form
     e.target.reset();
   };
 
-  // bu odada gönderilen mesajları anlık olarak getir
+  // instantly fetch messages sent in this room
   useEffect(() => {
-    // kolleksiyonun referasnını alma
+    // get reference of the collection
     const messagesCol = collection(db, "messages");
 
-    // filtreleme ayarları yap
+    //make filtering settings
     const q = query(
       messagesCol,
       where("room", "==", room),
       orderBy("createdAt", "asc")
     );
 
-    // anlık olarak bir kolleksiyondaki değişimleri izeler
-    // kollekisyon her değşitiğinde veridğimiz fonksiyona
-    // kolleksiyondaki dökümaları parametre olarak gönderir
+    // instantly monitors changes in a collection
+    // call the given function every time the collection changes
+    // sends the documents in the collection as parameters
     onSnapshot(q, snapshot => {
-      //  verilerin geçici olark tutulduğu dizi
+      // array where data is temporarily kept
       const tempMsg = [];
 
-      // dökümnları dön, verilerine eriş, diziye aktar
+      // return transcripts, access data, transfer to array
       snapshot.docs.forEach(doc => {
         tempMsg.push(doc.data());
       });
 
-      // mesajları state'e aktar
+      // transfer messages to state
       setMessages(tempMsg);
     });
   }, []);
@@ -71,7 +71,7 @@ const ChatPage = ({ room, setRoom }) => {
       <header>
         <p>{auth.currentUser?.displayName}</p>
         <p>{room}</p>
-        <button onClick={() => setRoom(null)}>Farklı Oda</button>
+        <button onClick={() => setRoom(null)}>Different Room</button>
       </header>
 
       <main>
@@ -81,8 +81,8 @@ const ChatPage = ({ room, setRoom }) => {
       </main>
 
       <form onSubmit={handleSubmit}>
-        <input required placeholder="mesajınızı yazınız" type="text" />
-        <button>Gönder</button>
+        <input required placeholder="write your message" type="text" />
+        <button>Send</button>
       </form>
     </div>
   );
