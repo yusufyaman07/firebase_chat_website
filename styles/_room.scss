@@ -1,0 +1,21 @@
+.room-page {
+  background-color: white;
+  color: #1a1a1a;
+  padding: 50px 60px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  text-align: center;
+  input {
+    padding: 5px 10px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.344);
+    border-radius: 8px;
+  }
+  & > button:last-child {
+    background-color: crimson;
+  }
+}

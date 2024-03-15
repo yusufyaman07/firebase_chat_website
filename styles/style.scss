@@ -1,0 +1,32 @@
+@use "login";
+@use "room";
+@use "chat";
+@use "message";
+
+h1 {
+  font-size: 50px;
+}
+button {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+  &:hover {
+    filter: brightness(60%);
+  }
+}
+.chat-page main {
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #f99417;
+  }
+}
