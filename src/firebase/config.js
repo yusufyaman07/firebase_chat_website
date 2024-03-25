@@ -19,10 +19,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//! kimlik doğrulama için bölümün referansını al
+//! get the reference of the partition for authentication
 export const auth = getAuth(app);
-//! google sağlayıcının kurulumu
+//!  installation of google provider
 export const provider = new GoogleAuthProvider();
 
-//! Veri tabanı referansı alındı
+//! Database reference retrieved
 export const db = getFirestore(app);

@@ -7,9 +7,9 @@ const LoginPage = ({ setIsAuth }) => {
   const [name, setName] = useState("");
   const handleClick = () => {
     signInWithPopup(auth, provider).then(data => {
-      // kullanıcının Giriş Durumunu State e aktar
+      // transfer the user's Login State to State
       setIsAuth(true);
-      // Token'ı localstroage a aktar
+      // Transfer token to localstroage
       localStorage.setItem("TOKEN", data.user.refreshToken);
     });
   };
@@ -17,10 +17,10 @@ const LoginPage = ({ setIsAuth }) => {
     <div className="container">
       <div className="auth">
         <h1>Chat Room</h1>
-        <p>Devam Etmek için giriş yapınız</p>
+        <p>Login to continue</p>
         <button onClick={handleClick}>
           <img src="./google_logo.png" alt="google" />
-          <span>Google ile giriş</span>
+          <span>Login with Google</span>
         </button>
       </div>
     </div>
